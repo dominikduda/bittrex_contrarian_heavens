@@ -5,4 +5,4 @@ require_relative 'market_data'
 require_relative 'day_data'
 require_relative 'print_sorted_percentages_to_ath'
 
-PrintSortedPercentagesToAth.call
+PrintSortedPercentagesToAth.new.call

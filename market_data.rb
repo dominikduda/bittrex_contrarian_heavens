@@ -1,5 +1,6 @@
 class MarketData
   attr_reader :name
+  attr_accessor :usd_ath_date
 
   def initialize(name)
     @name = name
