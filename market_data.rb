@@ -21,6 +21,15 @@ class MarketData
   private
 
   def get_all_time_daily_data
-    Bittrex.new.daily_data(name)['result']
+    if name == 'USDT_BTC'
+      Poloniex.btc_usd_data.map do |daily_data_hash|
+        {
+          'T' => Time.at(daily_data_hash['date']),
+          'C' => daily_data_hash['close']
+        }
+      end
+    else
+      Bittrex.new.daily_data(name)['result']
+    end
   end
 end

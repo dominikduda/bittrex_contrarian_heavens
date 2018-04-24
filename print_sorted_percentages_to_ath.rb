@@ -63,7 +63,7 @@ class PrintSortedPercentagesToAth
     markets_count = bittrex_btc_markets.count
     puts "\tFETCHING DATA (#{markets_count} BTC markets found) - STEP 1/3"
     @all_btc_markets_daily_data =
-      Bittrex.new.btc_markets_index.each_with_index.map do |market, i|
+      Bittrex.new.btc_markets_index.first(4).each_with_index.map do |market, i|
         puts "Fetching data for #{market['MarketName']} (#{i + 1} out of #{markets_count})"
         market_data = MarketData.new(market['MarketName'])
         market_data.all_daily_data
