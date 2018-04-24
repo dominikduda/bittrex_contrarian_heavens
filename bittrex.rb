@@ -1,8 +1,8 @@
 class Bittrex
   GET_TICKS_URL = 'https://bittrex.com/Api/v2.0/pub/market/GetTicks'.freeze
 
-  def btc_usd_daily_data
-    get_data('USDT-BTC')
+  def daily_data(market_name)
+    get_data(market_name)
   end
 
   private
