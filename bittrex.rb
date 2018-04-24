@@ -1,19 +1,29 @@
 class Bittrex
   GET_TICKS_URL = 'https://bittrex.com/Api/v2.0/pub/market/GetTicks'.freeze
+  GET_MARKETS_URL = 'https://bittrex.com/api/v1.1/public/getmarkets'.freeze
 
   def daily_data(market_name)
     get_data(market_name)
   end
 
+  def btc_markets_index
+    get(GET_MARKETS_URL)['result'].select { |market| market['BaseCurrency'] == 'BTC' }
+  end
+
   private
 
   def get_data(market_name, interval = 'day')
-    HTTParty.get(
+    get(
       GET_TICKS_URL,
-      query: {
-        marketName: market_name,
-        tickInterval: interval
-      }
+      marketName: market_name,
+      tickInterval: interval
+    )
+  end
+
+  def get(url, query = {})
+    HTTParty.get(
+      url,
+      query: query
     ).parsed_response
   end
 end
