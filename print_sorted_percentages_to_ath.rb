@@ -30,7 +30,9 @@ class PrintSortedPercentagesToAth
     puts "\tCALCULATING PERCENTAGES TO ATHS - STEP 3/3"
     markets_and_usd_aths.each_with_index do |(market_name, usd_ath), i|
       puts "Calculating percentage to ATH for #{market_name} (#{i + 1} out of #{total_market_count})"
-      current_price = Bittrex.new.current_price(market_name) * current_btc_price
+      current_price_in_btc = Bittrex.new.current_price(market_name)
+      puts 'CALCULATION FAILED' unless current_price_in_btc
+      current_price = current_btc_price * current_price_in_btc
       increase = usd_ath - current_price
       markets_and_percentages_to_aths[market_name] = increase / current_price * 100
     end
