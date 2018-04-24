@@ -29,7 +29,7 @@ class MarketData
         }
       end
     else
-      Bittrex.new.daily_data(name)['result']
+      Bittrex.new.daily_data(name)['result'][5..-1]
     end
   end
 end
